@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+appsettings.Development.json
+client_secret_627949666459-osmefee5qrhtmpdu54t5s1492qsmiafl.apps.googleusercontent.com.json
+
 # User-specific files
 *.rsuser
 *.suo
@@ -361,3 +364,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/appsettings.Development.json
+/client_secret_627949666459-osmefee5qrhtmpdu54t5s1492qsmiafl.apps.googleusercontent.com.json
+/client_secret_627949666459-osmefee5qrhtmpdu54t5s1492qsmiafl.apps.googleusercontent.com.json
+/client_secret_627949666459-osmefee5qrhtmpdu54t5s1492qsmiafl.apps.googleusercontent.com.json
