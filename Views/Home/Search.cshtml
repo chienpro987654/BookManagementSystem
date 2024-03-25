@@ -1,0 +1,74 @@
+﻿@model HomeSearchViewModel
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form class="container my-3" method="post" asp-action="Search">
+    <h1>Search Result</h1>
+    <div class="d-flex justify-content-center">
+        <div class="w-75 row">
+            <input class="form-control w-75" id="query" name="query" type="search" value="@Model.sQuery" placeholder="Search">
+            <button class="btn btn-secondary ms-3 col-2" style="min-width:64px" asp-controller="Home" asp-action="Search" type="submit">Search</button>
+        </div>
+    </div>
+
+    <div class="my-3 d-flex justify-content-center">
+        <div class="w-75">
+            <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Advanced Search
+            </a>
+            <div class="collapse" id="collapseExample">
+                <div class="row border border-1 box-shadow border-2" style="border-radius:4px">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <p class="col"><input name="checkedBoxes" value="@item.Id" type="checkbox" />  @item.Name</p>
+                    }
+                    <select id="sortOrder" name="sortOrder" class="form-select-sm form-select w-25">
+                        <option value="default" selected>Default</option>
+                        <option value="name_desc">Name Z-A</option>
+                        <option value="name_asc">Name A-Z</option>
+                        <option value="upload_desc">Lastest</option>
+                        <option value="upload_asc">Oldest</option>
+                        <option value="publish_desc">Published Lastest</option>
+                        <option value="publish_asc">Published Oldest</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="row my-3" style="width:85%">
+
+            @if (Model.BookResults != null && Model.BookResults.Count != 0)
+            {
+                @foreach (var item in Model.BookResults)
+                {
+                    <div class="card mb-3 w-100">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/@item.ImageName" class="img-fluid rounded-start h-100" style="object-fit:cover">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Title</h5>
+                                    <p class="card-text">@item.Description</p>
+                                    <p class="card-text"><small class="text-body-secondary">Date Uploaded: @item.CreatedAt</small></p>
+                                    <p class="card-text"><strong>Genre(s): </strong> @string.Join(" ", item.Categories.Select(x => x.Name).ToList())</p>
+                                    <p class="card-text"><strong>Author: </strong>@item.Author.Name</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No result found</p>
+            }
+        </div>
+    </div>
+</form>
+
+<script>
+
+</script>

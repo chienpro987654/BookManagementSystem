@@ -1,0 +1,59 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Category</h1>
+<div class="container mt-3">
+    <form asp-action="Category" method="post" class="d-flex justify-content-center">
+        <div class="w-25 row">
+            <div class="col-10">
+                <select name="CategoryId" id="CategoryId" class="form-select form-select-sm chosen-select col-10">
+                    <option selected>--Select--</option>
+                    @if (Model.Categories != null)
+                    {
+                        @foreach (var item in Model.Categories)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm col-2" asp-controller="Home" asp-action="Category">Go</button>
+        </div>
+    </form>
+</div>
+
+<div class="container mt-3">
+    <div class="h3 tex-center">Result</div>
+    @if (Model.BooksFromCategory != null && Model.BooksFromCategory.Count >= 0)
+    {
+        @foreach (var item in Model.BooksFromCategory)
+        {
+            <div class="card mb-3 w-100">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="~/images/@item.ImageName" class="img-fluid rounded-start h-100" style="object-fit:cover">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">@item.Description</p>
+                            <p class="card-text"><small class="text-body-secondary">Updated Date: @item.CreatedAt</small></p>
+                            <a class="btn btn-primary" asp-controller="Book" asp-action="DetailForUser" asp-route-Id="@item.Id">Read</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <text>No result(s) found.</text>
+    }
+</div>
+
+<script>
+    $(".chosen-select").chosen();
+</script>

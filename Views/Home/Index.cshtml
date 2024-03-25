@@ -1,0 +1,86 @@
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    bool isFirst = true;
+}
+<div class="container mb-3">
+    <div class="h2 mb-3">Featured & Recommend</div>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            @foreach (var item in Model.BookRecommend)
+            {
+                <a asp-controller="Book" asp-action="DetailForUser" asp-route-Id="@item.Id">
+                    <div class="@if (isFirst){isFirst = false; <text>carousel-item active</text>}else{<text>carousel-item</text>}">
+                        <img src="~/images/@item.ImageName" class="d-block w-100" style="max-height:400px;object-fit:cover" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>@item.Title</h5>
+                            <p style="overflow:hidden;text-overflow:ellipsis">@item.Description</p>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="m-3 row">
+        <div class="mb-3 col-8">
+            <div class="h2">Recently Uploaded</div>
+            @foreach (var item in Model.BooksRecent)
+            {
+                <div class="card mb-3 w-100">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            <img src="~/images/@item.ImageName" class="img-fluid rounded-start h-100" style="object-fit:cover">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Title</h5>
+                                <p class="card-text">@item.Description</p>
+                                <p class="card-text"><small class="text-body-secondary">Updated Date: @item.CreatedAt</small></p>
+                                <a class="btn btn-primary" asp-controller="Book" asp-action="DetailForUser" asp-route-Id="@item.Id">Read</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-4">
+            <div class="h2 mb-3 ms-5">Top Sales</div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(int i = 0; i < Model.BookTopSale.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i+1)</td>
+                            <td style="text-overflow:ellipsis" onclick="location.href='Book/DetailForUser/@Model.BookTopSale[i].Id'">
+                                @Model.BookTopSale[i].Title <br />
+                                Sold: @Model.BookTopSale[i].SoldQuantity
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

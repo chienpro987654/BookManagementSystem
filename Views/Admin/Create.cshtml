@@ -1,0 +1,36 @@
+﻿@model UserCreateModel
+@{
+    ViewData["Title"] = "Create A New User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<form method="post" asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Roles"></label>
+        <input asp-for="Roles" class="form-control" placeholder="You can add multiple roles here. Example: Admin,Manager,User"/>
+        <span asp-validation-for="Roles" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

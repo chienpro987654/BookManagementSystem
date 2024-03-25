@@ -1,0 +1,37 @@
+﻿@model BookReadViewModel
+@{
+    ViewData["Title"] = "Read";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="containter mt-3 text-center">
+    <div class="h3">@Model.Book.Title</div>
+    <div class="btn-group" role="group">
+        @if (Model.PrevPage != -1)
+        {
+            <a asp-controller="Book" asp-action="Read" asp-route-Id="@Model.Book.Id" asp-route-Page="@Model.PrevPage">Previous</a>
+        }
+        <a asp-controller="Book" asp-action="DetailForUser" asp-route-Id="@Model.Book.Id" class="mx-3">Catalogue</a>
+        @if (Model.NextPage != -1)
+        {
+            <a asp-controller="Book" asp-action="Read" asp-route-Id="@Model.Book.Id" asp-route-Page="@Model.NextPage">Next</a>
+        }
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="text-start mx-auto w-50">
+        @if (Model.ArrContent != null && Model.ArrContent.Count!=0)
+        {
+            @foreach (var item in Model.ArrContent)
+            {
+                <p>@item</p>
+            }
+        }
+        else
+        {
+            <text>Invalid Page</text>
+        }
+    </div>
+</div>
+

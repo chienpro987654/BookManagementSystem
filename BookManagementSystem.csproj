@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>0db5f863-becc-460c-a925-2edb7a6bce99</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\chosen-sprite.png" />
+    <Content Remove="wwwroot\css\chosen.css" />
+    <Content Remove="wwwroot\css\chosen.jquery.js" />
+    <Content Remove="wwwroot\css\chosen.jquery.min.js" />
+    <Content Remove="wwwroot\css\chosen.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Uploads\sources\20gpof3yza4.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.28" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.28" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.28" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.28" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.28" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.28" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.28">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="toastr" Version="2.1.1" />
+    <PackageReference Include="X.PagedList" Version="9.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\1244hab0gvi.jpg" />
+    <None Include="wwwroot\css\chosen-sprite.png" />
+    <None Include="wwwroot\css\chosen.css" />
+    <None Include="wwwroot\js\chosen.jquery.js" />
+    <None Include="wwwroot\js\chosen.jquery.min.js" />
+    <None Include="wwwroot\css\chosen.min.css" />
+  </ItemGroup>
+
+</Project>

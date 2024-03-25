@@ -1,0 +1,49 @@
+﻿@model UserViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="m-3">Edit A User</h1>
+
+
+<form method="post" asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="User.Id" hidden />
+    <div class="mb-3">
+        <label asp-for="User.Email"></label>
+        <input asp-for="User.Email" class="form-control" />
+        <span asp-validation-for="User.Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="User.FullName"></label>
+        <input asp-for="User.FullName" class="form-control" />
+        <span asp-validation-for="User.FullName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="User.Gender"></label>
+        @Html.DropDownListFor(model=>model.User.Gender,BookManagementSystem.Models.User.getGenderList(),
+        htmlAttributes: new {@class="form-select"})
+    </div>
+    <div class="mb-3">
+        <label asp-for="User.BirthDate"></label>
+        @Html.TextBoxFor(model => model.User.BirthDate, "{0:dd/MM/yyyy}", htmlAttributes: new { @class = "form-control" })
+        <span asp-validation-for="User.BirthDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="User.PhoneNumber"></label>
+        <input type="number" asp-for="User.PhoneNumber" class="form-control" />
+        <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Roles"></label>
+        <input asp-for="Roles" class="form-control" placeholder="You can add multiple roles here. Example: Admin,Manager,User" />
+        <span asp-validation-for="Roles" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
