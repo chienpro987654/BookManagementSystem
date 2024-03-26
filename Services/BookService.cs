@@ -226,6 +226,7 @@ namespace BookManagementSystem.Services
                 }
                 if (page != -1 && page <= arrIndexStart.Count)
                 {
+                    viewModel.CurrentPage = page + 1;
                     viewModel.PrevPage = (page == 0) ? -1 : page - 1;
                     viewModel.NextPage = (page >= arrIndexStart.Count - 1) ? -1 : page + 1;
                     viewModel.ArrContent = ArrContent;

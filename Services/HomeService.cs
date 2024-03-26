@@ -43,16 +43,46 @@ namespace BookManagementSystem.Services
                 .Include(x => x.Categories).Include(x => x.Author).ToListAsync();
             return viewModel;
         }
-        public async Task<HomeViewModel> createBookViewModelFromCategory(int CategoryId)
+        public async Task<HomeViewModel> createBookViewModelFromCategory(int CategoryId, string sortOrder)
         {
             HomeViewModel viewModel = new HomeViewModel();
             viewModel.Categories = await _db.Categories.ToListAsync();
             Category? category = await _db.Categories.Include(x => x.Books).Where(x => x.Id == CategoryId).FirstOrDefaultAsync();
-            if (category != null)
+            if (category != null && category.Books != null)
             {
-                viewModel.BooksFromCategory = category.Books;
+                viewModel.BooksFromCategory = getOrderBookList(category.Books, sortOrder);
             }
+            viewModel.CategoryIdSelected = CategoryId;
+            viewModel.SortOrderSelected = sortOrder;
             return viewModel;
+        }
+
+        public List<Book> getOrderBookList(List<Book> books, string sortOrder)
+        {
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    books = books.OrderByDescending(x => x.Title).ToList();
+                    break;
+                case "name_asc":
+                    books = books.OrderBy(x => x.Title).ToList();
+                    break;
+                case "upload_desc":
+                    books = books.OrderByDescending(x => x.CreatedAt).ToList();
+                    break;
+                case "upload_asc":
+                    books = books.OrderBy(x => x.Title).ToList();
+                    break;
+                case "publish_desc":
+                    books = books.OrderByDescending(x => x.PublishDate).ToList();
+                    break;
+                case "publish_asc":
+                    books = books.OrderBy(x => x.PublishDate).ToList();
+                    break;
+                default:
+                    break;
+            }
+            return books;
         }
     }
 }

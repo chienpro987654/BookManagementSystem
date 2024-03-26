@@ -23,6 +23,7 @@
     <div class="text-start mx-auto w-50">
         @if (Model.ArrContent != null && Model.ArrContent.Count!=0)
         {
+            <p class="h3 text-center">Chapter @Model.CurrentPage</p>
             @foreach (var item in Model.ArrContent)
             {
                 <p>@item</p>

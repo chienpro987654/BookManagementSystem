@@ -28,34 +28,14 @@ namespace BookManagementSystem.Controllers
             HomeSearchViewModel viewModel = await _homeService.createHomeSearchViewModel(query, checkedBoxes);
             if (viewModel.BookResults != null)
             {
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        viewModel.BookResults = viewModel.BookResults.OrderByDescending(x => x.Title).ToList();
-                        break;
-                    case "name_asc":
-                        viewModel.BookResults = viewModel.BookResults.OrderBy(x => x.Title).ToList();
-                        break;
-                    case "upload_desc":
-                        viewModel.BookResults = viewModel.BookResults.OrderByDescending(x => x.CreatedAt).ToList();
-                        break;
-                    case "upload_asc":
-                        viewModel.BookResults = viewModel.BookResults.OrderBy(x => x.Title).ToList();
-                        break;
-                    case "publish_desc":
-                        viewModel.BookResults = viewModel.BookResults.OrderByDescending(x => x.PublishDate).ToList();
-                        break;
-                    case "publish_asc":
-                        viewModel.BookResults = viewModel.BookResults.OrderBy(x => x.PublishDate).ToList();
-                        break;
-                }
+                viewModel.BookResults = _homeService.getOrderBookList(viewModel.BookResults, sortOrder);
             }
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Category(int CategoryId = -1)
+        public async Task<IActionResult> Category(string sortOrder, int CategoryId = -1)
         {
-            HomeViewModel viewModel = await _homeService.createBookViewModelFromCategory(CategoryId);
+            HomeViewModel viewModel = await _homeService.createBookViewModelFromCategory(CategoryId, sortOrder);
             return View(viewModel);
         }
 

@@ -6,6 +6,7 @@ namespace BookManagementSystem.Services
     {
         public Task<HomeViewModel> CreateHomeViewModelAsync();
         Task<HomeSearchViewModel> createHomeSearchViewModel(string query, List<string> selectedCategories);
-        Task<HomeViewModel> createBookViewModelFromCategory(int CategoryId);
+        Task<HomeViewModel> createBookViewModelFromCategory(int CategoryId, string sortOrder);
+        List<Book> getOrderBookList(List<Book> books, string sortOrder);
     }
 }

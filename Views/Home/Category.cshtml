@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Category</h1>
+<h1 class="mx-auto text-center mt-3 w-50">Searched By Category</h1>
 <div class="container mt-3">
     <form asp-action="Category" method="post" class="d-flex justify-content-center">
         <div class="w-25 row">
@@ -15,12 +15,35 @@
                     {
                         @foreach (var item in Model.Categories)
                         {
-                            <option value="@item.Id">@item.Name</option>
+                            if (item.Id == Model.CategoryIdSelected)
+                            {
+                                <option value="@item.Id" selected>@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
                         }
                     }
                 </select>
             </div>
             <button type="submit" class="btn btn-primary btn-sm col-2" asp-controller="Home" asp-action="Category">Go</button>
+            <div class="col-10">
+                <select id="sortOrder" name="sortOrder" class="form-select-sm form-select">
+                    <option value="default" selected>Default</option>
+                    @foreach(var item in BookManagementSystem.Models.HomeViewModel.getSortOrderList())
+                    {
+                        if (item.Key.Equals(Model.SortOrderSelected))
+                        {
+                            <option value=@item.Key selected>@item.Value</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Key>@item.Value</option>
+                        }
+                    }
+                </select>
+            </div>
         </div>
     </form>
 </div>
@@ -41,6 +64,7 @@
                             <h5 class="card-title">@item.Title</h5>
                             <p class="card-text">@item.Description</p>
                             <p class="card-text"><small class="text-body-secondary">Updated Date: @item.CreatedAt</small></p>
+                            <p class="card-text"><small class="text-body-secondary">Publish Date: @item.PublishDate</small></p>
                             <a class="btn btn-primary" asp-controller="Book" asp-action="DetailForUser" asp-route-Id="@item.Id">Read</a>
                         </div>
                     </div>
